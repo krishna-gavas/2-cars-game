@@ -4,6 +4,8 @@
 #include<stdlib.h>
 #include<string.h>
 #include<iostream>
+#include <fstream>
+#include <iostream>
 #include "game.h"
 
 #define COLUMNS 40
@@ -14,14 +16,16 @@
 #define RIGHT 2
 #define LEFT -2
 
+using namespace std;
+
 extern int  Direction;
 extern int flagL,flagR,flagU,flagD;
 extern int pointY1,pointY2;
 extern bool point1,point2;
-extern int score,highscore;
+extern int score;
 extern char buffer1[10],buffer2[10];
 bool gameOver = false;
-int q;
+int q,highscore;
 int screen = 0;
 
 
@@ -57,6 +61,11 @@ void init(){
 int main(int argc,char **argv){
 	glutInit(&argc,argv);
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);
+
+	ifstream myFile;
+	myFile.open("highScore.txt");
+	myFile>>highscore;
+	myFile.close();
 
 
 	glutInitWindowSize(500,700);
@@ -115,8 +124,17 @@ void display_callback(){
 	glutSwapBuffers();
 	for(q = 0; q<= 10000000; q++){;}
 	if(gameOver==true){
-		if(highscore<score)
+		fstream File;
+		File.open("highScore.txt",ios::in);
+		File>>highscore;
+		File.close();
+
+		if(highscore<score){
 			highscore = score;
+			File.open("highScore.txt",ios::out | ios::trunc);
+			File<<highscore;
+			File.close();
+		}
 		glColor3f(1,0,0);
 		drawText("Game  Over", 15,20);
 		drawText("Press ESC to quit", 13,18);

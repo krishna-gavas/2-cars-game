@@ -2,6 +2,8 @@
 #include<GL/glut.h>
 #include<string.h>
 #include<ctime>
+#include <fstream>
+#include <iostream>
 #include "game.h"
 
 #define UP 1
@@ -9,13 +11,15 @@
 #define RIGHT 2
 #define LEFT -2
 
+using namespace std;
+
 int width,height;
 int posX1=3,posY1=2,posX2=23,posY2=2;
 int Direction;
 int flagL=0,flagR=0,flagU=0,flagD=0;
 int pointX1,pointY1,pointX2,pointY2;
 bool point1 = true,point2 = true;
-int score = 0,i,highscore;
+int score = 0,i;
 char buffer1[10],buffer2[10];
 extern bool gameOver;
 
