@@ -127,7 +127,7 @@ void display_callback(){
 		fstream File;
 		File.open("highScore.txt",ios::in);
 		File>>highscore;
-		File.close();
+		
 
 		if(highscore<score){
 			highscore = score;
